@@ -1,4 +1,4 @@
-#include "ArrayStack.h"
+#include "StackArray.h"
 
 static void grow(struct ArrayStack * stack) 
 {

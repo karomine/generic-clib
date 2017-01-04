@@ -1,4 +1,4 @@
-#include "ArrayQueue.h"
+#include "QueueArray.h"
 #include <stdio.h>
 
 static void freeQueueArray(struct ArrayQueue * queue) {

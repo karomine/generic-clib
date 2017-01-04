@@ -1,4 +1,4 @@
-#include "LinkQueue.h"
+#include "QueueLink.h"
 
 struct Node 
 {

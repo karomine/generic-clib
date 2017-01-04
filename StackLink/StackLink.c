@@ -1,4 +1,4 @@
-#include "LinkStack.h"
+#include "StackLink.h"
 
 struct Node 
 {
