@@ -30,19 +30,19 @@ struct ArrayStack {
 };
 
 // add element to stack, pass element to add by address
-void push(struct ArrayStack * stack, void * element);
+void pushArrayStack(struct ArrayStack * stack, void * element);
 
 // removes top of the stack, caller responsible for ensuring stack is not empty (use empty function)
-void pop(struct ArrayStack * stack);
+void popArrayStack(struct ArrayStack * stack);
 
 // grabs top element from stack, copys to location pointed by reciever
-void top(struct ArrayStack * stack, void * reciever);
+void topArrayStack(struct ArrayStack * stack, void * reciever);
 
 // returns true for an empty stack
-int empty(struct ArrayStack * stack);
+int isEmptyArrayStack(struct ArrayStack * stack);
 
 // deallocates all memory allocated to stack and frees the stack structure
-void release(struct ArrayStack * stack);
+void releaseArrayStack(struct ArrayStack * stack);
 
 // creates an stack with properties suiting a certain data type
 struct ArrayStack * makeArrayStack(int elementSize, int startSize, 

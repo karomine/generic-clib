@@ -14,10 +14,10 @@ static struct Node * makeNode(struct LinkQueue * queue, void * element)
 	return link;
 }
 
-void push(struct LinkQueue * queue, void * element) 
+void pushLinkQueue(struct LinkQueue * queue, void * element) 
 {
 	struct Node * newTail = makeNode(queue, element);
-	if (empty(queue)) {
+	if (isEmptyLinkQueue(queue)) {
 		queue->head = newTail;
 	}
 	else {
@@ -26,7 +26,7 @@ void push(struct LinkQueue * queue, void * element)
 	queue->tail = newTail; 
 }
 
-void pop(struct LinkQueue * queue) 
+void popLinkQueue(struct LinkQueue * queue) 
 {
 	struct Node * toRemove = queue->head;
 	if (queue->head == queue->tail) {
@@ -39,17 +39,17 @@ void pop(struct LinkQueue * queue)
 	free(toRemove);
 }
 
-void front(struct LinkQueue * queue, void * reciever) 
+void frontLinkQueue(struct LinkQueue * queue, void * reciever) 
 {
 	queue->copy(reciever, queue->head->element, queue->elementSize);
 }
 
-int empty(struct LinkQueue * queue) 
+int isEmptyLinkQueue(struct LinkQueue * queue) 
 {
 	return queue->head == NULL;
 }
 
-void release(struct LinkQueue * queue) {
+void releaseLinkQueue(struct LinkQueue * queue) {
     struct node * iterator = queue->head;
     struct node * toRemove;
     while (iterator) {

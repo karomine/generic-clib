@@ -7,9 +7,7 @@ language - C
 #ifndef _LINK_QUEUE_
 #define _LINK_QUEUE_
 
-#include "stdlib.h"
-#include <stddef.h>
-
+#include <stdlib.h>
 
 /*
 ** head, tail are used internally
@@ -32,19 +30,19 @@ struct LinkQueue
 };
 
 // adds element on back of queue, element passed by address
-void push(struct LinkQueue * queue, void * element);
+void pushLinkQueue(struct LinkQueue * queue, void * element);
 
 // removes element at the front of the queue, caller responsible for ensuring queue is not empty (empty function)
-void pop(struct LinkQueue * queue);
+void popLinkQueue(struct LinkQueue * queue);
 
 // copys element at front of queue to location pointed by reciever
-void front(struct LinkQueue * queue, void * reciever);
+void frontLinkQueue(struct LinkQueue * queue, void * reciever);
 
 // returns true of queue is empty
-int empty(struct LinkQueue * queue);
+int isEmptyLinkQueue(struct LinkQueue * queue);
 
 // deallocates all memory allocated to queue and frees queue sructure
-void release(struct LinkQueue * queue);
+void releaseLinkQueue(struct LinkQueue * queue);
 
 // creates queue with properties suiting a certain data type
 struct LinkQueue * makeCustomLinkQueue(int elementSize, 

@@ -30,19 +30,19 @@ struct LinkStack
 };
 
 // add element to stack, pass element to add by address
-void push(struct LinkStack * stack, void * element);
+void pushLinkStack(struct LinkStack * stack, void * element);
 
 //removes top of the stack, caller responsible for ensuring stack is not empty (use empty function)
-void pop(struct LinkStack * stack);
+void popLinkStack(struct LinkStack * stack);
 
 //grabs top element from stack, copys to location pointed by reciever
-void top(struct LinkStack * stack, void * reciever);
+void topLinkStack(struct LinkStack * stack, void * reciever);
 
 //returns true for an empty stack
-int empty(struct LinkStack * stack);
+int isEmptyLinkStack(struct LinkStack * stack);
 
 //deallocates all memory allocated to stack and frees the stack structure
-void release(struct LinkStack * stack);
+void releaseLinkStack(struct LinkStack * stack);
 
 //creates an stack with properties suiting a certain data type
 struct LinkStack * makeLinkStack(int elementSize,

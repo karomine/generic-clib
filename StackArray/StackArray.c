@@ -1,31 +1,36 @@
 #include "StackArray.h"
 
+static void setSize(struct ArrayStack * stack, int size)
+{
+    stack->maxSize = size;
+    stack->stack = realloc(stack->stack, stack->maxSize * stack->elementSize);
+}
+
 static void grow(struct ArrayStack * stack) 
 {
-    stack->maxSize *= 2;
-    stack->stack = realloc(stack->stack, stack->maxSize * stack->elementSize);
+    setSize(stack, stack->maxSize * 2);
 }
 
-static void shrink(struct ArrayStack * stack) {
-    stack->maxSize /= 2;
-    stack->stack = realloc(stack->stack, stack->maxSize * stack->elementSize);
+static void shrink(struct ArrayStack * stack) 
+{
+    setSize(stack, stack->maxSize / 2);
 }
 
-static int full(struct ArrayStack * stack) 
+static int isFull(struct ArrayStack * stack) 
 {
     return stack->currentSize == stack->maxSize;
 }
 
-void push(struct ArrayStack * stack, void * element) 
+void pushArrayStack(struct ArrayStack * stack, void * element) 
 {
-    if (full(stack)) {
+    if (isFull(stack)) {
         grow(stack);
     }
     stack->copyFunction(stack->stack + (stack->currentSize++ * stack->elementSize),
         element, stack->elementSize);
 }
 
-void pop(struct ArrayStack * stack) 
+void popArrayStack(struct ArrayStack * stack) 
 {
     if (stack->freeFunction) {
         stack->freeFunction(stack->stack + stack->elementSize * (stack->currentSize - 1));
@@ -36,18 +41,18 @@ void pop(struct ArrayStack * stack)
     }
 }
 
-void top(struct ArrayStack * stack, void * recieve) 
+void topArrayStack(struct ArrayStack * stack, void * recieve) 
 {
     stack->copyFunction(recieve, stack->stack + ((stack->currentSize - 1) * stack->elementSize),
         stack->elementSize);
 }
 
-int empty(struct ArrayStack * stack) 
+int isEmptyArrayStack(struct ArrayStack * stack) 
 {
     return stack->currentSize == 0;
 }
 
-void release(struct ArrayStack * stack) 
+void releaseArrayStack(struct ArrayStack * stack) 
 {
     int i;
     if (stack->freeFunction) {

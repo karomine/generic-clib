@@ -14,19 +14,14 @@ static struct Node * makeStackNode(struct LinkStack * stack, void * element)
     return node;
 }
 
-void push(struct LinkStack * stack, void * element) 
+void pushLinkStack(struct LinkStack * stack, void * element) 
 {
     struct Node * top = makeStackNode(stack, element);
     top->next = stack->top;
     stack->top = top;
 }
 
-void top(struct LinkStack * stack, void * reciever) 
-{
-    stack->copyFunction(reciever, stack->top->element, stack->elementSize);
-}
-
-void pop(struct LinkStack * stack) 
+void popLinkStack(struct LinkStack * stack)
 {
     struct Node * toRemove = stack->top;
     stack->top = toRemove->next;
@@ -34,7 +29,13 @@ void pop(struct LinkStack * stack)
     free(toRemove);
 }
 
-int empty(struct LinkStack * stack) 
+
+void topLinkStack(struct LinkStack * stack, void * reciever) 
+{
+    stack->copyFunction(reciever, stack->top->element, stack->elementSize);
+}
+
+int isEmptyLinkStack(struct LinkStack * stack) 
 {
     return stack->top == NULL;
 }

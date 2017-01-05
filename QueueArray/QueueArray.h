@@ -10,9 +10,10 @@ language - C
 #include <stdlib.h>
 
 /*
-** currentSize, maxSize, head, tail, and queue are used internally
-** elementSize, copyFunction, and freeFuncton provided by caller in makeQueueStack
+** currentSize, maxSize, head, tail, and queue are managed internally
+** elementSize, startSize, copyFunction, and freeFuncton provided by caller in makeQueueStack
 ** elementSize - size of data type put on queue
+** startSize - starting size of queue 
 ** copyFunction
     ** how to copy the data type from one memory location to another
     ** signature matches memcpy to allow simple/shallow copies by passing it in
@@ -33,19 +34,19 @@ struct ArrayQueue {
 };
 
 // add element to queue, pass element to add by address
-void push(struct ArrayQueue * queue, void * element);
+void pushArrayQueue(struct ArrayQueue * queue, void * element);
 
 // removes front of queue, caller responsible for ensuring queue is not empty (empty function)
-void pop(struct ArrayQueue * queue);
+void popArrayQueue(struct ArrayQueue * queue);
 
-// grabs front element from queue, copys to location pointed by reciever
-void top(struct ArrayQueue * queue, void * reciever);
+// grabs front element from queue, copys to location pointed by reciever, caller responsible for ensuring not empty
+void topArrayQueue(struct ArrayQueue * queue, void * reciever);
 
 // return true for an empty queue
-int empty(struct ArrayQueue * queue);
+int isEmptyArrayQueue(struct ArrayQueue * queue);
 
 // free all dynamic memory in queue and free structure 
-void release(struct ArrayQueue * queue);
+void releaseArrayQueue(struct ArrayQueue * queue);
 
 // creates a queue with properties suiting a certain data type
 struct ArrayQueue * makeArrayQueue(int elementSize, int startSize,

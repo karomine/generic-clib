@@ -1,5 +1,4 @@
 #include "QueueArray.h"
-#include <stdio.h>
 
 static void freeQueueArray(struct ArrayQueue * queue) {
     int iterator;
@@ -51,14 +50,14 @@ static void shrink(struct ArrayQueue * queue)
     setSize(queue, queue->maxSize / 2);
 }
 
-static int full(struct ArrayQueue * queue)
+static int isFull(struct ArrayQueue * queue)
 {
     return queue->currentSize == queue->maxSize; 
 }
 
-void push(struct ArrayQueue * queue, void * element) 
+void pushArrayQueue(struct ArrayQueue * queue, void * element) 
 {
-    if (empty(queue)) 
+    if (isEmptyArrayQueue(queue)) 
     {
         queue->copyFunction(queue->queue, element, queue->elementSize);
         queue->head = queue->tail = 0;
@@ -66,7 +65,7 @@ void push(struct ArrayQueue * queue, void * element)
     }
     else
     {
-        if (full(queue))
+        if (isFull(queue))
         {
             grow(queue);
         }
@@ -77,7 +76,7 @@ void push(struct ArrayQueue * queue, void * element)
     }
 }
 
-void pop(struct ArrayQueue * queue)
+void popArrayQueue(struct ArrayQueue * queue)
 {
     if (queue->freeFunction) {
         queue->freeFunction(queue->queue + queue->head * queue->elementSize);
@@ -90,17 +89,17 @@ void pop(struct ArrayQueue * queue)
     }
 }
 
-void top(struct ArrayQueue * queue, void * reciever) 
+void topArrayQueue(struct ArrayQueue * queue, void * reciever) 
 {
     queue->copyFunction(reciever, queue->queue + queue->head * queue->elementSize, queue->elementSize);
 }
 
-int empty(struct ArrayQueue * queue) 
+int isEmptyArrayQueue(struct ArrayQueue * queue) 
 {
     return queue->currentSize == 0;
 }
 
-void release(struct ArrayQueue * queue) {
+void releaseArrayQueue(struct ArrayQueue * queue) {
     freeQueueArray(queue);
     free(queue);
 }
