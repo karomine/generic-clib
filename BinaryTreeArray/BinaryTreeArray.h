@@ -16,7 +16,7 @@ language - C
 ** startSize - starting size of BST
 ** copyFunction
     ** how to copy the data type from one memory location to another
-    ** signature matches memcpy to allow simple/shallow copie sby passing it in
+    ** signature matches memcpy to allow simple/shallow copies by passing it in
 ** freeFunction
     ** how to release any dynamically allocated memory from copy function
     ** pass NULL if deallocation not needed
@@ -25,13 +25,14 @@ language - C
     ** return -1 arg1 < arg2, 0 for arg1 == arg2, 1 for arg1 > arg2
 */
 
-struct BinarySearchTreeArray {
+struct BinarySearchTreeArray
+{
     struct Node * tree;
-    int elementSize;
     int root;
-    int(*comparisonFunction)(const void *, const void *, size_t);
+    int(*comparisonFunction)(const void *, const void *);
     void *(*copyFunction)(void *, const void *, size_t);
     void(*freeFunction)(void *);
+    int elementSize;
     int currentSize;
     int maxSize;
 };
@@ -50,8 +51,10 @@ void releaseBinarySearchTreeArray(struct BinarySearchTreeArray * tree);
 
 // create BST with properties suiting a certain data type
 struct BinarySearchTreeArray * makeBinarySearchTreeArray(int elementSize, int startSize,
-    int(*compareFunction)(const void *, const void *, size_t),
+    int(*compareFunction)(const void *, const void *),
     void *(*copyFunction)(void *, const void *, size_t),
     void(*freeFunction)(void *));
+
+void printTree(struct BinarySearchTreeArray * tree);
 
 #endif
