@@ -7,9 +7,25 @@ struct Node
     struct Node * rightChild;
 };
 
+static void releaseNode(struct BinarySearchTreeLink * tree, struct Node * node)
+{
+    tree->freeFunction(node->element);
+    free(node);
+}
+
 static int isLeafNode(struct Node * node)
 {
-    return node->leftChild == NULL && node->rightChild == NULL;
+    return noLeftChild(node) && noRightChild(node);
+}
+
+static int noLeftChild(struct Node * node)
+{
+    return node->leftChild == NULL;
+}
+
+static int noRightChild(struct Node * node)
+{
+    return node->rightChild == NULL;
 }
 
 static struct Node * makeNode(struct BinarySearchTreeLink * tree, void * element)
@@ -79,8 +95,18 @@ static struct Node * removeNode(struct BinarySearchTreeLink * tree, struct Node 
 {
     if (isLeafNode(node))
     {
-        tree->freeFunction(node->element);
+        releaseNode(tree, node);
         return NULL;
+    }
+    else if (noLeftChild(node))
+    {
+        releaseNode(tree, node);
+        return node->rightChild;
+    }
+    else if (noRightChild(node))
+    {
+        releaseNode(tree, node);
+        return node->leftChild;
     }
     else if (node->leftChild == NULL)
     {
